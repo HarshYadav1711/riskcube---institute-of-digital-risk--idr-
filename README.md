@@ -79,3 +79,9 @@ Modern evergreen browsers (Chrome, Firefox, Safari, Edge). Uses `IntersectionObs
 ## License
 
 © RiskCube — Institute of Digital Risk. All rights reserved.
+
+## Design Decisions
+
+This project was intentionally built using semantic HTML, modern CSS and vanilla JavaScript to demonstrate strong frontend fundamentals without relying on frameworks.
+
+The interface prioritizes clarity, accessibility and performance while maintaining a clean startup-style landing page aesthetic.
