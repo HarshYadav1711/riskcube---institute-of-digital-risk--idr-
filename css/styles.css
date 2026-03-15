@@ -20,15 +20,17 @@
   --color-border-strong: #cbd5e1;
 
   /* Typography */
-  --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-size-base: 1rem;
-  --font-size-lead: 1.25rem;
+  --font-size-lead: 1.125rem;
   --font-size-h2: 1.75rem;
-  --font-size-h3: 1.25rem;
-  --font-size-hero: 2.25rem;
-  --line-height-body: 1.6;
-  --line-height-tight: 1.35;
+  --font-size-h3: 1.125rem;
+  --font-size-hero: 2.5rem;
+  --line-height-body: 1.65;
+  --line-height-relaxed: 1.75;
+  --line-height-tight: 1.25;
   --letter-spacing-tight: -0.02em;
+  --letter-spacing-hero: -0.03em;
 
   /* Spacing scale (8px base: 4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72px) */
   --space-xs: 0.5rem;   /* 8px */
@@ -49,7 +51,7 @@
   --section-gap-lead: var(--space-md);
 
   /* Layout */
-  --content-max: 65ch;
+  --content-max: 58ch;
   --content-wide: min(90vw, 1200px);
   --header-height: 3.5rem;
 
@@ -550,6 +552,7 @@ body.dark-mode .theme-toggle__icon--sun {
 .section__lead {
   margin: 0 0 var(--section-gap-lead);
   font-size: var(--font-size-lead);
+  line-height: var(--line-height-relaxed);
   color: var(--color-text-muted);
   max-width: var(--content-max);
 }
@@ -574,6 +577,15 @@ body.dark-mode .theme-toggle__icon--sun {
   .hero {
     padding-top: var(--space-6xl);
     padding-bottom: var(--space-6xl);
+  }
+
+  .hero__title {
+    font-size: 3.75rem;
+    letter-spacing: -0.04em;
+  }
+
+  .section__title {
+    font-size: 2.25rem;
   }
 }
 
@@ -802,15 +814,16 @@ body.dark-mode .theme-toggle__icon--sun {
 .hero__title {
   margin: 0 0 var(--space-md);
   font-size: var(--font-size-hero);
-  font-weight: 600;
+  font-weight: 700;
   line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-tight);
+  letter-spacing: var(--letter-spacing-hero);
   color: var(--color-text);
 }
 
 .hero__tagline {
   margin: 0 0 var(--space-2xl);
   font-size: var(--font-size-lead);
+  line-height: var(--line-height-relaxed);
   color: var(--color-text-muted);
 }
 
@@ -915,11 +928,12 @@ body.dark-mode .theme-toggle__icon--sun {
   }
 
   .hero__title {
-    font-size: 3rem;
+    font-size: 3.25rem;
+    letter-spacing: -0.035em;
   }
 
   .hero__tagline {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
   }
 }
 
