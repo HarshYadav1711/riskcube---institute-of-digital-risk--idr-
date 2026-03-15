@@ -270,9 +270,34 @@
     heroVisual.addEventListener('mouseleave', onMouseLeave);
   }
 
+  /**
+   * Scroll reveal: add .visible when .reveal elements enter viewport (once).
+   * Uses IntersectionObserver; no libraries.
+   */
+  function initReveal() {
+    var revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length === 0) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: '0px 0px -40px 0px', threshold: 0.1 }
+    );
+
+    revealEls.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
   initSmoothScroll();
   initMobileNav();
   initStickyHeader();
   initNavActiveState();
   initHeroCube();
+  initReveal();
 })();
