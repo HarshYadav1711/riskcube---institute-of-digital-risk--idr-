@@ -1,6 +1,6 @@
 /**
  * RiskCube — Institute of Digital Risk
- * Vanilla JS: smooth scroll, mobile nav toggle.
+ * Vanilla JS: smooth scroll, sticky nav scroll state, mobile nav toggle.
  * Site remains usable without JS (anchor navigation still works).
  */
 
@@ -9,7 +9,7 @@
 
   var nav = document.getElementById('site-nav');
   var toggle = document.querySelector('.nav-toggle');
-  var navLinks = document.querySelectorAll('.site-nav__link');
+  var header = document.querySelector('.site-header');
 
   /**
    * Smooth scroll for in-page anchor links.
@@ -99,6 +99,25 @@
     document.addEventListener('click', handleClickOutside);
   }
 
+  /**
+   * Sticky header: add shadow when page is scrolled (for visual separation).
+   */
+  function initStickyHeader() {
+    if (!header) return;
+
+    function updateScrollState() {
+      if (window.scrollY > 10) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    }
+
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+  }
+
   initSmoothScroll();
   initMobileNav();
+  initStickyHeader();
 })();
