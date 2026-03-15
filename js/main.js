@@ -40,21 +40,30 @@
   }
 
   /**
-   * Open mobile nav: show menu, update aria-expanded, trap focus optionally.
+   * Open mobile nav: show menu, lock body scroll, update ARIA, focus first link.
    */
   function openNav() {
     if (!nav || !toggle) return;
     nav.classList.add('is-open');
     toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close main menu');
+    document.body.classList.add('nav-open');
+    var firstLink = nav.querySelector('a');
+    if (firstLink) {
+      setTimeout(function () { firstLink.focus(); }, 100);
+    }
   }
 
   /**
-   * Close mobile nav: hide menu, update aria-expanded.
+   * Close mobile nav: hide menu, unlock body scroll, update ARIA, return focus to toggle.
    */
   function closeNav() {
     if (!nav || !toggle) return;
     nav.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open main menu');
+    document.body.classList.remove('nav-open');
+    toggle.focus();
   }
 
   /**
@@ -91,12 +100,35 @@
     closeNav();
   }
 
+  /**
+   * Trap focus inside mobile nav when open: Tab from last goes to first; Shift+Tab from first goes to toggle.
+   */
+  function handleNavKeydown(e) {
+    if (!nav || !nav.classList.contains('is-open') || e.key !== 'Tab') return;
+    var focusables = nav.querySelectorAll('a[href]');
+    if (focusables.length === 0) return;
+    var first = focusables[0];
+    var last = focusables[focusables.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        toggle.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
   function initMobileNav() {
     if (!toggle) return;
 
     toggle.addEventListener('click', handleToggleClick);
     document.addEventListener('keydown', handleKeydown);
     document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleNavKeydown);
   }
 
   /**
