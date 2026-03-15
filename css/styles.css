@@ -515,6 +515,7 @@ body.dark-mode .theme-toggle__icon--sun {
 .section:nth-of-type(5) { animation-delay: 0.25s; }
 .section:nth-of-type(6) { animation-delay: 0.3s; }
 .section:nth-of-type(7) { animation-delay: 0.35s; }
+.section:nth-of-type(8) { animation-delay: 0.4s; }
 
 .section__inner {
   max-width: var(--content-wide);
