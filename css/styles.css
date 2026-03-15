@@ -554,6 +554,148 @@ body.dark-mode .theme-toggle__icon--sun {
 }
 
 /* --------------------------------------------------------------------------
+   Pillars (interactive cube + tooltips; stacked cards on mobile)
+   -------------------------------------------------------------------------- */
+.pillars__lead {
+  margin-bottom: var(--space-xl);
+}
+
+.pillars__visual {
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-2xl);
+  margin-top: var(--space-xl);
+}
+
+.pillars__cube-wrap {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  perspective: 300px;
+}
+
+.pillars__cube-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pillars__cube-face {
+  fill: var(--color-accent);
+  opacity: 0.9;
+  transition: opacity var(--transition-fast), filter var(--transition-fast);
+}
+
+.pillars__cube-face--top {
+  opacity: 0.75;
+}
+
+.pillars__cube-face--right {
+  opacity: 0.6;
+}
+
+.pillar-face {
+  cursor: pointer;
+  outline: none;
+}
+
+.pillar-face:hover .pillars__cube-face,
+.pillar-face:focus-visible .pillars__cube-face {
+  opacity: 1;
+  filter: brightness(1.08);
+}
+
+.pillar-face:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.pillars__tooltips {
+  flex: 1;
+  min-width: 0;
+  max-width: 360px;
+  position: relative;
+  min-height: 120px;
+}
+
+.pillar-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: var(--space-lg);
+  background: var(--color-bg-section);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.pillar-tip__title {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pillar-tip__text {
+  margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.pillars.pillars--active-academy .pillar-tip--academy,
+.pillars.pillars--active-innovation .pillar-tip--innovation,
+.pillars.pillars--active-advisory .pillar-tip--advisory {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pillars__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.pillars__card {
+  padding: var(--space-xl);
+  background: var(--color-bg-section);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.pillars__card-title {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pillars__card-text {
+  margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .pillars__visual {
+    display: flex;
+  }
+
+  .pillars__cards {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Hero
    -------------------------------------------------------------------------- */
 .hero {

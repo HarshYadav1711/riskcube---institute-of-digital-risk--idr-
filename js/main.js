@@ -153,7 +153,7 @@
    * Navigation active state: highlight the link for the section currently in view.
    */
   function initNavActiveState() {
-    var sectionIds = ['hero', 'trust', 'about', 'operating-model', 'community', 'case-study', 'contact'];
+    var sectionIds = ['hero', 'pillars', 'trust', 'about', 'operating-model', 'community', 'case-study', 'contact'];
     var navLinks = document.querySelectorAll('.site-nav__link');
     var sectionRatios = {};
 
@@ -329,11 +329,60 @@
     updateThemeColor();
   }
 
+  /**
+   * Pillars: show tooltip when hovering or focusing a cube face.
+   */
+  function initPillars() {
+    var section = document.getElementById('pillars');
+    var faces = document.querySelectorAll('.pillar-face');
+    if (!section || faces.length === 0) return;
+
+    var blurTimer = null;
+
+    function setActive(pillar) {
+      section.classList.remove('pillars--active-academy', 'pillars--active-innovation', 'pillars--active-advisory');
+      if (pillar) section.classList.add('pillars--active-' + pillar);
+    }
+
+    faces.forEach(function (face) {
+      var pillar = face.getAttribute('data-pillar');
+      if (!pillar) return;
+
+      face.addEventListener('mouseenter', function () {
+        clearTimeout(blurTimer);
+        setActive(pillar);
+      });
+
+      face.addEventListener('mouseleave', function () {
+        setActive(null);
+      });
+
+      face.addEventListener('focus', function () {
+        clearTimeout(blurTimer);
+        setActive(pillar);
+      });
+
+      face.addEventListener('blur', function () {
+        blurTimer = setTimeout(function () {
+          setActive(null);
+        }, 150);
+      });
+
+      face.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setActive(pillar);
+        }
+      });
+    });
+  }
+
   initSmoothScroll();
   initMobileNav();
   initStickyHeader();
   initNavActiveState();
   initHeroCube();
+  initPillars();
   initReveal();
   initThemeToggle();
 })();
