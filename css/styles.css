@@ -54,6 +54,11 @@
   --radius-lg: 12px;
   --transition-fast: 0.15s ease;
   --transition-base: 0.2s ease;
+
+  /* Gradient accents (emphasis only; core palette unchanged) */
+  --gradient-accent: linear-gradient(135deg, #2563eb 0%, var(--color-accent) 50%, var(--color-accent-hover) 100%);
+  --gradient-accent-subtle: linear-gradient(180deg, rgba(29, 78, 216, 0.06) 0%, rgba(29, 78, 216, 0.02) 50%, transparent 100%);
+  --gradient-divider: linear-gradient(90deg, transparent 0%, var(--color-accent) 20%, var(--color-accent) 80%, transparent 100%);
 }
 
 /* Dark theme — override variables when body has .dark-mode */
@@ -71,6 +76,9 @@ body.dark-mode {
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.35), 0 2px 4px -2px rgba(0, 0, 0, 0.25);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --gradient-accent: linear-gradient(135deg, #93c5fd 0%, var(--color-accent) 50%, var(--color-accent-hover) 100%);
+  --gradient-accent-subtle: linear-gradient(180deg, rgba(96, 165, 250, 0.08) 0%, rgba(96, 165, 250, 0.03) 50%, transparent 100%);
+  --gradient-divider: linear-gradient(90deg, transparent 0%, var(--color-accent) 20%, var(--color-accent) 80%, transparent 100%);
 }
 
 /* --------------------------------------------------------------------------
@@ -700,12 +708,24 @@ body.dark-mode .theme-toggle__icon--sun {
    Hero
    -------------------------------------------------------------------------- */
 .hero {
+  position: relative;
   padding-top: var(--space-3xl);
   padding-bottom: var(--space-3xl);
   text-align: center;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-accent-subtle);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .hero__inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--content-max);
   margin: 0 auto;
 }
@@ -785,17 +805,17 @@ body.dark-mode .theme-toggle__icon--sun {
   font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--color-on-accent);
-  background: var(--color-accent);
+  background: var(--gradient-accent);
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow var(--transition-base), transform var(--transition-fast);
+  transition: opacity 0.2s ease, box-shadow var(--transition-base), transform var(--transition-fast);
 }
 
 .hero__cta:hover {
-  background: var(--color-accent-hover);
+  opacity: 0.95;
   box-shadow: var(--shadow-md);
   transform: translateY(-2px) scale(1.02);
   text-decoration: none;
@@ -811,10 +831,22 @@ body.dark-mode .theme-toggle__icon--sun {
    Trust (Trusted by)
    -------------------------------------------------------------------------- */
 .trust {
+  position: relative;
   padding-top: var(--space-2xl);
   padding-bottom: var(--space-2xl);
   background: var(--color-bg-section);
   border-top: 1px solid var(--color-border);
+}
+
+.trust::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--gradient-divider);
+  opacity: 0.6;
 }
 
 .trust__inner {
@@ -1118,17 +1150,17 @@ body.dark-mode .theme-toggle__icon--sun {
   font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--color-on-accent);
-  background: var(--color-accent);
+  background: var(--gradient-accent);
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
   margin-top: var(--space-sm);
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow var(--transition-base), transform var(--transition-fast);
+  transition: opacity 0.2s ease, box-shadow var(--transition-base), transform var(--transition-fast);
 }
 
 .contact__submit:hover {
-  background: var(--color-accent-hover);
+  opacity: 0.95;
   box-shadow: var(--shadow-md);
   transform: translateY(-2px) scale(1.02);
 }
@@ -1150,12 +1182,24 @@ body.dark-mode .theme-toggle__icon--sun {
    Footer
    -------------------------------------------------------------------------- */
 .site-footer {
+  position: relative;
   padding: var(--space-xl) var(--space-md);
   border-top: 1px solid var(--color-border);
   background: var(--color-bg-section);
   text-align: center;
   font-size: 0.875rem;
   color: var(--color-text-muted);
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--gradient-divider);
+  opacity: 0.5;
 }
 
 .site-footer__inner {
