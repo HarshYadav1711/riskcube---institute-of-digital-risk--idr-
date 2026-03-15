@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Institute of Digital Risk — research, training, and advisory on digital risk for organisations, boards, and practitioners.">
-  <meta name="theme-color" content="#1d4ed8">
+  <meta name="theme-color" content="#1d4ed8" id="theme-color-meta">
   <title>RiskCube — Institute of Digital Risk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <script>(function(){try{var v=localStorage.getItem('darkMode');if(v==='true')document.body.classList.add('dark-mode');}catch(e){}})();</script>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <header class="site-header" role="banner">
@@ -31,6 +32,16 @@
         <li class="site-nav__item"><a href="#contact" class="site-nav__link">Contact</a></li>
       </ul>
     </nav>
+    <div class="site-header__actions">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </span>
+        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+      </button>
+    </div>
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open main menu">
       <span class="nav-toggle__icon" aria-hidden="true">
         <span class="nav-toggle__icon-bar"></span>

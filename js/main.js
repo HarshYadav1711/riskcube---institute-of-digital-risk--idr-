@@ -294,10 +294,46 @@
     });
   }
 
+  /**
+   * Dark mode toggle: switch body.dark-mode, persist in localStorage.
+   */
+  function initThemeToggle() {
+    var toggle = document.getElementById('theme-toggle');
+    var body = document.body;
+    if (!toggle || !body) return;
+
+    function savePreference(isDark) {
+      try {
+        localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+      } catch (e) {}
+    }
+
+    function updateLabel() {
+      var isDark = body.classList.contains('dark-mode');
+      toggle.setAttribute('aria-label', isDark ? 'Toggle light mode' : 'Toggle dark mode');
+    }
+
+    function updateThemeColor() {
+      var meta = document.getElementById('theme-color-meta');
+      if (meta) meta.setAttribute('content', body.classList.contains('dark-mode') ? '#0f172a' : '#1d4ed8');
+    }
+
+    toggle.addEventListener('click', function () {
+      body.classList.toggle('dark-mode');
+      savePreference(body.classList.contains('dark-mode'));
+      updateLabel();
+      updateThemeColor();
+    });
+
+    updateLabel();
+    updateThemeColor();
+  }
+
   initSmoothScroll();
   initMobileNav();
   initStickyHeader();
   initNavActiveState();
   initHeroCube();
   initReveal();
+  initThemeToggle();
 })();
