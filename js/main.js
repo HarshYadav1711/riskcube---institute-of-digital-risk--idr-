@@ -149,7 +149,130 @@
     window.addEventListener('scroll', updateScrollState, { passive: true });
   }
 
+  /**
+   * Navigation active state: highlight the link for the section currently in view.
+   */
+  function initNavActiveState() {
+    var sectionIds = ['hero', 'trust', 'about', 'operating-model', 'community', 'case-study', 'contact'];
+    var navLinks = document.querySelectorAll('.site-nav__link');
+    var sectionRatios = {};
+
+    function getLinkForSection(id) {
+      for (var i = 0; i < navLinks.length; i++) {
+        var href = navLinks[i].getAttribute('href');
+        if (href === '#' + id) return navLinks[i];
+      }
+      return null;
+    }
+
+    function setActiveSection(activeId) {
+      navLinks.forEach(function (link) {
+        link.classList.remove('is-active');
+        link.removeAttribute('aria-current');
+      });
+      var activeLink = activeId ? getLinkForSection(activeId) : null;
+      if (activeLink) {
+        activeLink.classList.add('is-active');
+        activeLink.setAttribute('aria-current', 'section');
+      }
+    }
+
+    function updateActiveFromRatios() {
+      var maxRatio = 0;
+      var activeId = null;
+      sectionIds.forEach(function (id) {
+        var r = sectionRatios[id] || 0;
+        if (r > maxRatio) {
+          maxRatio = r;
+          activeId = id;
+        }
+      });
+      setActiveSection(activeId);
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var id = entry.target.id;
+          if (id) sectionRatios[id] = entry.intersectionRatio;
+        });
+        updateActiveFromRatios();
+      },
+      { root: null, rootMargin: '-15% 0px -60% 0px', threshold: [0, 0.1, 0.2, 0.3, 0.5, 0.7, 1] }
+    );
+
+    sectionIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  }
+
+  /**
+   * Hero cube: subtle rotation from mouse (desktop) or gentle float (mobile).
+   * No rotation on hover: prefer reduced motion or touch device.
+   */
+  function initHeroCube() {
+    var heroVisual = document.getElementById('hero-visual');
+    var cubeWrap = document.getElementById('hero-cube-wrap');
+    if (!heroVisual || !cubeWrap) return;
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasHover = window.matchMedia('(hover: hover)').matches;
+    var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (prefersReducedMotion || !hasHover || isTouch) {
+      heroVisual.classList.add('is-float');
+      return;
+    }
+
+    var currentX = 0;
+    var currentY = 0;
+    var targetX = 0;
+    var targetY = 0;
+    var maxRot = 8;
+    var ease = 0.08;
+    var rafId = null;
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    var idleThreshold = 0.02;
+
+    function updateTransform() {
+      rafId = null;
+      currentX = lerp(currentX, targetX, ease);
+      currentY = lerp(currentY, targetY, ease);
+      cubeWrap.style.transform = 'rotateX(' + currentY + 'deg) rotateY(' + currentX + 'deg)';
+      var dx = Math.abs(targetX - currentX);
+      var dy = Math.abs(targetY - currentY);
+      if (dx > idleThreshold || dy > idleThreshold) {
+        rafId = requestAnimationFrame(updateTransform);
+      }
+    }
+
+    function onMouseMove(e) {
+      var rect = heroVisual.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width;
+      var y = (e.clientY - rect.top) / rect.height;
+      targetX = (x - 0.5) * 2 * maxRot;
+      targetY = (y - 0.5) * 2 * -maxRot;
+      if (!rafId) rafId = requestAnimationFrame(updateTransform);
+    }
+
+    function onMouseLeave() {
+      targetX = 0;
+      targetY = 0;
+      if (!rafId) rafId = requestAnimationFrame(updateTransform);
+    }
+
+    heroVisual.addEventListener('mousemove', onMouseMove, { passive: true });
+    heroVisual.addEventListener('mouseleave', onMouseLeave);
+  }
+
   initSmoothScroll();
   initMobileNav();
   initStickyHeader();
+  initNavActiveState();
+  initHeroCube();
 })();

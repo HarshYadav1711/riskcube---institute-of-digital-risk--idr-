@@ -22,9 +22,10 @@
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <ul class="site-nav__list">
-        <li class="site-nav__item"><a href="#hero" class="site-nav__link">Hero</a></li>
+        <li class="site-nav__item"><a href="#hero" class="site-nav__link">Home</a></li>
+        <li class="site-nav__item"><a href="#trust" class="site-nav__link">Trusted by</a></li>
         <li class="site-nav__item"><a href="#about" class="site-nav__link">About</a></li>
-        <li class="site-nav__item"><a href="#operating-model" class="site-nav__link">Operating Model</a></li>
+        <li class="site-nav__item"><a href="#operating-model" class="site-nav__link">What we do</a></li>
         <li class="site-nav__item"><a href="#community" class="site-nav__link">Community</a></li>
         <li class="site-nav__item"><a href="#case-study" class="site-nav__link">Case Study</a></li>
         <li class="site-nav__item"><a href="#contact" class="site-nav__link">Contact</a></li>
@@ -42,9 +43,33 @@
   <main id="main-content" class="main-content" role="main">
     <section id="hero" class="section hero" aria-labelledby="hero-title">
       <div class="hero__inner">
+        <div class="hero__visual" id="hero-visual" aria-hidden="true">
+          <div class="hero__cube-wrap" id="hero-cube-wrap">
+            <svg class="hero__cube-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <title>Decorative cube graphic</title>
+              <!-- Isometric cube: front, top, right faces -->
+              <path class="hero__cube-face hero__cube-face--front" d="M50 45 L80 62.5 L50 80 L20 62.5 Z"/>
+              <path class="hero__cube-face hero__cube-face--top" d="M20 62.5 L50 80 L50 45 L20 27.5 Z"/>
+              <path class="hero__cube-face hero__cube-face--right" d="M80 62.5 L50 80 L50 45 L80 27.5 Z"/>
+            </svg>
+          </div>
+        </div>
         <h1 id="hero-title" class="hero__title">Institute of Digital Risk</h1>
         <p class="hero__tagline">Rigorous research and practical frameworks for how organisations understand and govern digital risk.</p>
         <a href="#contact" class="hero__cta">Contact us</a>
+      </div>
+    </section>
+
+    <section id="trust" class="section trust" aria-labelledby="trust-title">
+      <div class="section__inner trust__inner">
+        <h2 id="trust-title" class="trust__title">Trusted by</h2>
+        <p class="trust__lead">Risk and compliance leaders at leading organisations rely on our frameworks and training.</p>
+        <div class="trust__logos" aria-hidden="true">
+          <span class="trust__logo-item">Organisation</span>
+          <span class="trust__logo-item">Organisation</span>
+          <span class="trust__logo-item">Organisation</span>
+          <span class="trust__logo-item">Organisation</span>
+        </div>
       </div>
     </section>
 
