@@ -82,6 +82,10 @@ Modern evergreen browsers (Chrome, Firefox, Safari, Edge). Uses `IntersectionObs
 
 ## Design Decisions
 
-This project was intentionally built using semantic HTML, modern CSS and vanilla JavaScript to demonstrate strong frontend fundamentals without relying on frameworks.
+## Design Notes
 
-The interface prioritizes clarity, accessibility and performance while maintaining a clean startup-style landing page aesthetic.
+I wanted the interface to feel simple and structured, similar to modern startup landing pages.
+
+The cube icon represents layered digital resilience — each square represents a layer of risk management controls.
+
+I focused on building the site with semantic HTML and minimal JavaScript to keep the project lightweight and easy to extend.
